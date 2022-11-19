@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+
+if [[ $# != 3 ]];
+then
+	echo nombre d\'argument est incorrect
+	exit 1
+fi
+
+if [[ ! (-e $1 && -r $1) ]];
+then
+	echo $1: fichier n\'exist pas ou n\'est pas accessible en lecture
+	exit 2
+fi
+if [[ ! (-e $2 && -r $2) ]];
+then
+	echo $2: fichier n\'exist pas ou n\'est pas accessible en lecture
+	exit 2
+fi
+
+if [[ ! -f $1 ]];
+then
+	echo $1: n\'est pas un fichier
+	exit 3
+fi
+if [[ ! -f $2 ]];
+then
+	echo $2: n\'est pas un fichier
+	exit 3
+fi
+
+dir=$(dirname $3)
+if [[ ! -w $dir ]];
+then
+	echo $dir: repertoire de desitination n\'est accessible en ecriture
+	exit 5
+fi
+
+cat $1 $2 > $3

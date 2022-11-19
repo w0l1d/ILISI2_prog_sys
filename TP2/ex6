@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+if [[ $# != 1 ]];
+then
+	echo invalide argument
+	exit 1
+fi
+
+
+
+bl=0
+cat $1 | while read line; 
+do
+	if [[ $bl == 0 ]]; 
+	then
+		echo $(date) > $1
+		bl=1
+	fi
+	echo $line >> $1
+done
+
+

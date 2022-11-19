@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+echo Bienvenue dans le Menu du gestion des personnes
+
+function ajouter {
+	read -p "Entez le nom du presonne : " pers
+	read -p "Entez son numero de tele : " tele
+	echo "$pers,$tele" >> pers_db 
+}
+
+function chercher {
+	read -p "Entrez le mot cle de recherche : " key
+	grep "$key" pers_db
+}
+
+function supprimer_v1 {
+	read -p "Entrez le mot cle de recherche : " key
+	IFS=':'
+	line=($(grep -n "$key" pers_db))
+	
+	sed -i "${line[0]}d" pers_db
+}
+
+function supprimer_v2 {
+	read -p "Entrez le mot cle de recherche : " key
+	rst=$(grep -v "$key" pers_db)
+	echo "$rst" > pers_db
+}
+
+
+function modifier {
+	read -p "Entrez le mot cle de recherche : " key
+	IFS=':'
+	line=($(grep -n "$key" pers_db))
+	if [[ ! $line =~ ^[1-9][0-9]*$ ]];
+	then
+		echo personne n\'est pas trouvee
+		continue
+	fi
+	read -p "Entez le nouveau nom du presonne : " pers
+	read -p "Entez son numero de tele : " tele
+	
+	sed -i "${line}s/.*/${pers},${tele}/" pers_db
+}
+
+
+choix=0
+while [[ $choix != "6" ]];
+do
+	
+	read -n 1 -s -r -p "Press any key to continue"
+	
+	clear
+	cat ex9_menu
+	read -p "Votre choix ? : " choix	
+
+	
+	case $choix in
+	1)
+		ajouter;;
+	
+	2) 	chercher;;
+	
+	3)	supprimer_v1;;
+	
+	4) 	modifier;;
+	
+	5)	cat pers_db;;
+	
+	6) 
+		echo 'au revoir ;)';;
+	
+	*) echo choix invalide;;
+	
+	esac
+	
+done

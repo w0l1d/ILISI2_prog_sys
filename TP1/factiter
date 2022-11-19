@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+if [[ $1 =~ ^[0-9]+$ ]]
+then
+	n=$1
+	rst=1
+	while [[ $n > 1 ]]; 
+	do 
+	$(( rst *= n-- )) >> /dev/null 2>&1
+	done
+	echo $rst
+else
+	echo parametre invalide!
+	exit 1
+fi
+
+
+
+

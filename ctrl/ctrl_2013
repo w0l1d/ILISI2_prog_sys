@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+<<'###'
+something something ${FOO{}} something
+more comment
+
+choix=0
+while [[ $choix != 'q' ]];
+do
+	echo 1 - Verifier l\'existance d\'un utilisateur
+	echo 2 - Connaitre le UID d\'un utilisateur
+	echo q - Quiter
+	
+	read -p "Votre Choix : " choix
+	case "$choix" in
+	1) read -p "Entrer le nom de l'utilisateur : " user
+		if cut -d":" -f1 "/etc/passwd" | grep "^$user$" ;
+		then
+			echo l\'utilisateur exist
+		else
+			echo l\'utilisateur n\'existe pas
+		fi;;
+	2) read -p "Entrer le nom de l'utilisateur : " user
+		id -u $user;;
+	"q") echo Good Bye;;
+	*) echo Choix Invalide;;
+	esac
+	
+	read -n 1 -s -r
+done
+###
+
+
+while read line 
+do
+	line=($line)
+	m=0
+	s=${#line[@]}
+	for i in ${line[@]:1}; 
+	do 
+		m=$(( m + i ))
+	done
+	m=$(( $m / (${#line[@]} - 1) ))
+	echo "${line[0]} $m"
+done < "etudiants"

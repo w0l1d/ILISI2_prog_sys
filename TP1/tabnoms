@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+
+declare -a arr
+
+
+while read line;
+do
+	arr=("${arr[@]}" "$line")
+done < <(cut -d":" -f1 /etc/passwd)
+
+size=${#arr[*]}
+
+
+echo Nombre total des utilisateurs enregistres : $size
+
+echo tire au hasard d\'un utilisateur : ${arr[$(($RANDOM%$size))]}
+
+

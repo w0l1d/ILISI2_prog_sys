@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+if [[ ! -e "./ARCHIVES" ]]; 
+	then mkdir ./ARCHIVES 
+fi
+
+for fl in $(ls); 
+do
+	if [[ -f $fl ]];
+	then
+		
+		cp -r $fl ./ARCHIVES/$fl
+	fi
+done

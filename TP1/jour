@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+arr=()
+IFS=" " read -ra arr <<< $(date)
+echo ${arr[2]}
+

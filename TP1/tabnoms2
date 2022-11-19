@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+
+
+
+
+size=($(wc -l /etc/passwd))
+size=${size[0]}
+
+rnd=$(($RANDOM%$size))
+
+rnd_user=$(cut -d":" -f1 /etc/passwd | head -n $rnd | tail -1)
+
+echo Nombre total des utilisateurs enregistres : $size
+
+echo tire au hasard d\'un utilisateur : $rnd_user
+
+

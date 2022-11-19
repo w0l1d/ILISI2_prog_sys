@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+if [[ -z $1 ]]
+then
+	echo "$0: missing operand"
+	return 1
+fi
+
+
+
+#arr=()
+#IFS="/"
+#arr=($1)
+#index=$(( ${#arr[*]} - 1 ))
+#file=${arr[$index]}
+
+
+
+file=$1
+file=${file##*/}
+
+if [[ -n $2 ]]
+then
+#	IFS=$2
+#	file=($file)
+#	file=${file[0]}
+	
+	file=${file%%$2}		
+fi
+
+echo $file

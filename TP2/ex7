@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+
+if [[ $# != 2 ]];
+then
+	echo nombre d\'argument est incorrect
+	exit 1
+fi
+
+if [[ ! (-e $1 && -r $1) ]];
+then
+	echo $1: fichier n\'exist pas ou n\'est pas accessible en lecture
+	exit 2
+fi
+
+if [[ ! -f $1 ]];
+then
+	echo $1: n\'est pas un fichier
+	exit 3
+fi
+
+if [[ -e $2 ]];
+then
+	echo $2: fichier desitination existe deja
+	exit 4
+fi
+dir=$(dirname $2)
+if [[ -w $dir ]];
+then
+	echo $dir: repertoire de desitination n\'est accessible en ecriture
+	exit 5
+fi
+
+cp $1 $2 > /dev/null 2>&1
+
+if [[ $? != 0 ]];
+then
+	echo "La copie a echoue"
+	exit 99
+fi
+
+

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+if [[ $# == 0 ]]; 
+then
+	echo "vous devez donner au moins un nom d'utilisateur"
+	exit 1
+fi
+
+for i in "$@";
+do
+	
+	homedir=($(getent passwd "$i" | cut -d: -f6,7))
+	shell=$(basename ${homedir[1]})
+	homedir=${homedir[0]}
+	echo username: $i, home directory: $homedir, shell: $shell
+done
+

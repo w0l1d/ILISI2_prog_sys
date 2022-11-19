@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+
+cat personnes | while read line 
+do
+	arr=()
+	arr=($line)
+
+	case ${arr[1]} in
+	"f") echo ${arr[0]} >> filles;;
+	"m") echo ${arr[0]} >> garcons;;
+	*) echo "genre inconnue !!"
+	esac
+done

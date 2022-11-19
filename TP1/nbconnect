@@ -1,0 +1,6 @@
+#!/usr/bin/env bash 
+
+
+arr=$(who)
+
+echo "Nombre des utilisateurs connectes : ${#arr[*]}"

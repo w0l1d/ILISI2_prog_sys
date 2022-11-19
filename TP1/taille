@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [[ $#  != 1 ]]
+then 
+echo "argument non valid!"
+return 1
+fi
+rst=()
+IFS=" " read -ra rst <<< $(ls -l $1 | cut -d" " -f1,5)
+echo "information du fichier $1"
+echo "droits d'acces : ${rst[0]}" 
+echo "taile du fichier : ${rst[1]}"

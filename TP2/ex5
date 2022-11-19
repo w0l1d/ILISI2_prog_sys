@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+for i in "$@";
+do
+	head $i
+	rm -i $i
+done

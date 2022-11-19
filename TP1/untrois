@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+tab=()
+while [[ ${#tab[*]} < 3 ]]
+do
+	read -p "Entrez une suite de mots : " -a  tab
+done
+
+echo ${tab[0]} ${tab[2]}
+

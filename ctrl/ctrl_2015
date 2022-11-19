@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+while read line
+do
+	IFS=':'
+	line=($line)
+	if [[ ${line[2]} > 100 ]]
+	then
+		echo ${line[0]}
+	fi
+done <'/etc/passwd'
+
+$(( a=2-3 ))
+echo "$#"
+
+
+

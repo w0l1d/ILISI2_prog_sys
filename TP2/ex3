@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+cat > fich_ex3
+nb_line=($(wc -l fich_ex3))
+echo Nombre de lignes ecrites : ${nb_line[0]}
+
+
+

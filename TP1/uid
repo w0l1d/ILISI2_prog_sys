@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+#uid=$(id -u)
+
+arr=()
+
+IFS='='
+arr=($(id))
+
+IFS='('
+arr=(${arr[1]})
+
+echo ${arr[0]}
+
+
+

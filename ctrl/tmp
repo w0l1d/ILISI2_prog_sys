@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+a=-1
+b=0
+function somme
+{
+return $(($1 + $2))
+}
+somme $a $b
+echo "le resultat : $?"
+echo $(($RANDOM % 6))
+
+
+function taille {
+	s=$(cat tmp | wc -c)
+	s=$(( s/1024 ))
+	echo $s
+}
+
+x=0
+arr=($(ls /usr/bin/))
+for f in ${arr[@]};
+do
+	if [[ -x "/usr/bin/$f" ]] && [[ -f "/usr/bin/$f" ]];
+	then
+		((x++))
+	fi
+done
+
+echo executables : $x

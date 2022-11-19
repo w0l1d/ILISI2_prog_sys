@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+reps=()
+read -p "Entrer les noms des repertoires : " -r arr
+
+arr=($arr)
+for i in ${arr[*]}; do
+  ls $i
+done 
+

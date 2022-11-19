@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+arr=()
+read -p "Entrez une suite de mots : " -a arr
+
+echo ${#arr[*]} "=> ${#arr[*]} mots ont ete saisis"
+
