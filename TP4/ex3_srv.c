@@ -12,8 +12,8 @@
 
 
 typedef struct msgbuf {
-	long mtype;
-	int tab[2];
+	long int mtype;
+	long tab[2];
 }Request, Response, MSG;
 
 
@@ -39,16 +39,15 @@ int main() {
 	while (running) {
 		printf("\nserver: waiting for request...\n");
 		
-		if(msgrcv(freq, &(msg.tab[0]), sizeof(msg.tab[0]), 0, 0) == -1 || 
-			msgrcv(freq, &(msg.tab[1]), sizeof(msg.tab[1]), 0, 0) == -1) {
+		if(msgrcv(freq, (void*)&msg, sizeof(msg.tab[0])*2, 0, 0) == -1)
 			perror("\nserver: msgrcv error!");
-		}else {
+		else {
 			printf("\nreceived %d %d", msg.tab[0], msg.tab[1]);
-			msg.tab[0] = msg.tab[0]+msg.tab[1];
+			msg.tab[0] += msg.tab[1];
 			
-			if (msgsnd(fres, (void*)&(msg.tab[0]), sizeof(int), 0) == -1) {
+			if (msgsnd(fres, (void*)&msg, sizeof(long), 0) == -1)
 					perror("\nserver: message not sent");
-			}
+			
 		}
 	}
 	

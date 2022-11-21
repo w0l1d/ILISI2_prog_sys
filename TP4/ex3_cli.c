@@ -13,8 +13,8 @@
 
 
 typedef struct msgbuf {
-	long mtype;
-	int tab[2];
+	long int mtype;
+	long tab[2];
 }Request, Response, MSG;
 
 
@@ -43,10 +43,9 @@ int main() {
 		scanf("%d%d", &(msg.tab[0]), &(msg.tab[1]));
 		if(msg.tab[0] == 0 && msg.tab[1] == 0)
 			running = 0;
-		if (msgsnd(freq, (int *)&msg.tab[0], sizeof(msg.tab[0]), 0) == -1 
-		|| msgsnd(freq, (int *)&msg.tab[1], sizeof(msg.tab[1]), 0) == -1) {
+		if (msgsnd(freq, (void*)&msg, sizeof(msg.tab[0])*2, 0) == -1) {
 				perror("\nclientmessage not sent");
-		} else if (msgrcv(fres, (int *)&(msg.tab[0]), sizeof(msg.tab[0]), getpid(), 0) == -1) {
+		} else if (msgrcv(fres, (void*)&msg, sizeof(long), getpid(), 0) == -1) {
 			perror("\nclient: could not receive result");
 		} else 
 			printf("\nclient : result.. %d", msg.tab[0]);
