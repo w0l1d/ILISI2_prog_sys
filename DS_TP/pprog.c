@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
 	for (i = 1; i <= n; ++i) {
 		if(!(pids[i-1] = fork())) {
 			sprintf(buffer, "%d", i);
-			execl("/home/walid/DS_TP/fils", "fils", buffer, NULL);
+			execl("./fils", "fils", buffer, NULL);
 		}
 	}
 	
